@@ -56,4 +56,13 @@ dependencies {
 
     // New Material Design
     implementation "com.google.android.material:material:1.0.0"
+
+    // Navigation
+    implementation "android.arch.navigation:navigation-fragment:$navigation_version"
+    implementation "android.arch.navigation:navigation-ui:$navigation_version"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "android.arch.navigation:navigation-ui-ktx:$navigation_version"
+
+    implementation "androidx.core:core-ktx:1.0.1"
+
 }
