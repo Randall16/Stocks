@@ -1,9 +1,13 @@
-package com.randallgr.stocks
+/**
+ * This adapter class is what allowed for the fragments to be scrollable. Each of the
+ * container fragments will have one these adapters to manage its children fragments.
+ */
+
+package com.randallgr.stocks.ui
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter
 
 
 class ViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {

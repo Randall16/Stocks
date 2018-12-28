@@ -1,4 +1,4 @@
-package com.randallgr.stocks
+package com.randallgr.stocks.ui
 
 
 import android.os.Bundle
@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.fragment_stocks_container.*
+import com.randallgr.stocks.R
 import kotlinx.android.synthetic.main.fragment_stocks_container.view.*
 
 
@@ -41,8 +40,8 @@ class StocksContainerFragment : Fragment() {
 
     private fun setupViewPager(viewPager: ViewPager) {
         val mAdapter = ViewPagerAdapter(this.childFragmentManager)
-        mAdapter.addFragment( FavoriteStocksFragment(), "Frag1")
-        mAdapter.addFragment( FavoriteStocksFragment(), "Frag2")
+        mAdapter.addFragment(FavoriteStocksFragment(), "Frag1")
+        mAdapter.addFragment(FavoriteStocksFragment(), "Frag2")
         viewPager.adapter = mAdapter
     }
 }

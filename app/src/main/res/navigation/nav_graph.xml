@@ -3,6 +3,6 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/nav_graph" app:startDestination="@id/stocksContainerFragment2">
 
-    <fragment android:id="@+id/stocksContainerFragment2" android:name="com.randallgr.stocks.StocksContainerFragment"
+    <fragment android:id="@+id/stocksContainerFragment2" android:name="com.randallgr.stocks.ui.StocksContainerFragment"
               android:label="StocksContainerFragment"/>
 </navigation>
