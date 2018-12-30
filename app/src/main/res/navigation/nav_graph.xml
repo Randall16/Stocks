@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nav_graph" app:startDestination="@id/stocksContainerFragment2">
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph" app:startDestination="@id/destination_stocks">
 
-    <fragment android:id="@+id/stocksContainerFragment2" android:name="com.randallgr.stocks.ui.StocksContainerFragment"
-              android:label="StocksContainerFragment"/>
+    <fragment android:id="@+id/destination_stocks" android:name="com.randallgr.stocks.ui.StocksContainerFragment"
+              android:label="Stocks" tools:layout="@layout/fragment_stocks_container">
+        <action android:id="@+id/action_stocksContainerFragment2_to_cryptocurrencyContainerFragment"
+                app:destination="@id/destination_cryptocurrency"/>
+    </fragment>
+    <fragment android:id="@+id/destination_cryptocurrency"
+              android:name="com.randallgr.stocks.ui.CryptocurrencyContainerFragment"
+              android:label="Cryptocurrencies"
+              tools:layout="@layout/fragment_cryptocurrency_container">
+        <action android:id="@+id/action_cryptocurrencyContainerFragment_to_stocksContainerFragment2"
+                app:destination="@id/destination_stocks"/>
+    </fragment>
 </navigation>

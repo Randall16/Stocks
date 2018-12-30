@@ -29,6 +29,7 @@ class FavoriteStocksFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_favorite_stocks, container, false)
 
+        /*
         val temp = API_Client_Instance.IEX_API_INSTANCE
 
         // Sample run of pulling Google stock and displaying it TextView
@@ -41,6 +42,7 @@ class FavoriteStocksFragment : Fragment() {
 
             }
         })
+        */
 
         return view
     }
