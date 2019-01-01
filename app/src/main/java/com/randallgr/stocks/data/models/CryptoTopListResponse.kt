@@ -1,7 +1,7 @@
 /**
  * This file is a bit of a mess. It contains multiple data classes to handle the API response when querying for the top
  * cryptocurrencies by volume. In the outer class we have function to convert this convoluted response into an easy to
- * work with list of CryptoTopListItems.
+ * work with list of ListItems.
  */
 
 package com.randallgr.stocks.data.models
@@ -15,8 +15,8 @@ data class CryptoTopListResponse(
     val Type: Int
 ) {
 
-    fun toList(): List<CryptoTopListItem> {
-        val answer = mutableListOf<CryptoTopListItem>()
+    fun toList(): List<ListItem> {
+        val answer = mutableListOf<ListItem>()
 
         for(i in Data) {
             val name = i.CoinInfo.FullName
@@ -26,7 +26,7 @@ data class CryptoTopListResponse(
             val change24Hour = i.RAW.USD.CHANGE24HOUR
             val change24HourPercent = i.RAW.USD.CHANGEPCT24HOUR
 
-            val item = CryptoTopListItem(name, symbol, imageUrl, price, change24Hour, change24HourPercent)
+            val item = ListItem(name, symbol, price, change24Hour, change24HourPercent, imageUrl)
             answer.add(item)
         }
 
