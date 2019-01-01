@@ -4,7 +4,7 @@
  */
 package com.randallgr.stocks.data.models
 
-data class ListItem(
+data class FinancialItem(
     val name: String,
     val symbol: String,
     val latestPrice: Double,

@@ -6,9 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 
 import com.randallgr.stocks.R
-
+import kotlinx.android.synthetic.main.fragment_cryptocurrency_container.view.*
 
 
 class CryptocurrencyContainerFragment : Fragment() {
@@ -18,8 +19,19 @@ class CryptocurrencyContainerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cryptocurrency_container, container, false)
+        val view = inflater.inflate(R.layout.fragment_cryptocurrency_container, container, false)
+
+        setupViewPager(view.viewPager)
+        view.tabs.setupWithViewPager(view.viewPager)
+
+        return view
     }
 
+    private fun setupViewPager(viewPager: ViewPager) {
+        val viewPagerAdapter = ViewPagerAdapter(childFragmentManager)
+        viewPagerAdapter.addFragment(TopCryptocurrenciesFragment(), "Top")
+        viewPagerAdapter.addFragment(TopCryptocurrenciesFragment(), "Favorites")
+        viewPager.adapter = viewPagerAdapter
+    }
 
 }

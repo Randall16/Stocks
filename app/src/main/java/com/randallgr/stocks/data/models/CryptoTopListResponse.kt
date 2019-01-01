@@ -15,8 +15,8 @@ data class CryptoTopListResponse(
     val Type: Int
 ) {
 
-    fun toList(): List<ListItem> {
-        val answer = mutableListOf<ListItem>()
+    fun toList(): List<FinancialItem> {
+        val answer = mutableListOf<FinancialItem>()
 
         for(i in Data) {
             val name = i.CoinInfo.FullName
@@ -26,7 +26,7 @@ data class CryptoTopListResponse(
             val change24Hour = i.RAW.USD.CHANGE24HOUR
             val change24HourPercent = i.RAW.USD.CHANGEPCT24HOUR
 
-            val item = ListItem(name, symbol, price, change24Hour, change24HourPercent, imageUrl)
+            val item = FinancialItem(name, symbol, price, change24Hour, change24HourPercent, imageUrl)
             answer.add(item)
         }
 
