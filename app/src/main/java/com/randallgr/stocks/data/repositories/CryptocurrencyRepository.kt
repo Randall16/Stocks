@@ -21,7 +21,7 @@ class CryptocurrencyRepository private constructor (application: Application) {
 
     // Public members/functions
     val cryptocurrenciesList: LiveData<List<FinancialItem>>
-        get() = _cryptocurrenciesList
+        by lazy { _cryptocurrenciesList}
 
 
     fun updatePrices() {
@@ -29,6 +29,7 @@ class CryptocurrencyRepository private constructor (application: Application) {
            override fun onResponse(call: Call<CryptoTopListResponse>, response: Response<CryptoTopListResponse>) {
 
                _cryptocurrenciesList.postValue(response.body()?.toList())
+
            }
 
            override fun onFailure(call: Call<CryptoTopListResponse>, t: Throwable) {

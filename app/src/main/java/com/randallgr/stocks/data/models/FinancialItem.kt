@@ -12,5 +12,4 @@ data class FinancialItem(
     val change24HourPercent: Double,
     var imageURL: String? = null
 ) {
-
 }

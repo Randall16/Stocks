@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.randallgr.stocks.R
 import com.randallgr.stocks.data.models.FinancialItem
 import kotlinx.android.synthetic.main.financial_item_layout.view.*
+import kotlin.math.roundToInt
 
 class FinancialItemListAdapter internal constructor(context: Context)
     : RecyclerView.Adapter<FinancialItemListAdapter.FinancialItemHolder>() {
@@ -35,7 +36,12 @@ class FinancialItemListAdapter internal constructor(context: Context)
     }
 
     override fun onBindViewHolder(holder: FinancialItemHolder, position: Int) {
-        // Left off here
+        val current = items[position]
+        holder.symbolTextView.text = current.symbol
+        holder.nameTextView.text = current.name
+        holder.priceTextView.text = current.latestPrice.toString()
+        holder.percentPriceChangeTextView.text = current.change24HourPercent.roundToInt().toString() + "%"
+        holder.priceChangeTextView.text = current.change24Hour.roundToInt().toString()
     }
 
     override fun getItemCount() = items.size

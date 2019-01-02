@@ -30,7 +30,7 @@ class CryptocurrencyContainerFragment : Fragment() {
     private fun setupViewPager(viewPager: ViewPager) {
         val viewPagerAdapter = ViewPagerAdapter(childFragmentManager)
         viewPagerAdapter.addFragment(TopCryptocurrenciesFragment(), "Top")
-        viewPagerAdapter.addFragment(TopCryptocurrenciesFragment(), "Favorites")
+        viewPagerAdapter.addFragment(FavoriteStocksFragment(), "Favorites")
         viewPager.adapter = viewPagerAdapter
     }
 
