@@ -1,5 +1,6 @@
 package com.randallgr.stocks.data.network
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -11,6 +12,7 @@ object API_Client_Instance {
     val CryptoCompare_API_INSTANCE = Retrofit.Builder()
         .baseUrl(CryptoCompare_Base_URL)
         .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
         .create(CryptoCompareInterface::class.java)
 

@@ -2,29 +2,17 @@ package com.randallgr.stocks.ui
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.HorizontalScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.get
-import androidx.recyclerview.R.attr.layoutManager
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-
 import com.randallgr.stocks.R
-import com.randallgr.stocks.data.models.CryptoTopListResponse
-import com.randallgr.stocks.data.network.API_Client_Instance
 import com.randallgr.stocks.viewmodels.TopCryptocurrenciesViewModel
-import kotlinx.android.synthetic.main.fragment_top_cryptocurrencies.view.*
-import org.intellij.lang.annotations.JdkConstants
-import retrofit2.Call
-import retrofit2.Response
 
 
 class TopCryptocurrenciesFragment : Fragment() {
@@ -49,7 +37,7 @@ class TopCryptocurrenciesFragment : Fragment() {
         val ref = view.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
 
         ref.setOnRefreshListener{
-            topCryptocurrenciesViewModel.updatePrices()
+            topCryptocurrenciesViewModel.updateTopPrices()
             ref.isRefreshing = false
         }
 
@@ -63,7 +51,7 @@ class TopCryptocurrenciesFragment : Fragment() {
             .get(TopCryptocurrenciesViewModel::class.java)
 
         // observe live data in viewModel
-        topCryptocurrenciesViewModel.items.observe(this, Observer { financialItems ->
+        topCryptocurrenciesViewModel.topCryptocurrencies.observe(this, Observer { financialItems ->
             financialItems?.let { adapter.setFinancialItems(it) }
         })
 

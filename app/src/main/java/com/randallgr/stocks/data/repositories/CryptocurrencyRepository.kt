@@ -4,11 +4,15 @@
 package com.randallgr.stocks.data.repositories
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.randallgr.stocks.data.models.CryptoTopListResponse
 import com.randallgr.stocks.data.models.FinancialItem
 import com.randallgr.stocks.data.network.API_Client_Instance
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.coroutineScope
 import retrofit2.Call
 import retrofit2.Response
 
@@ -17,25 +21,10 @@ class CryptocurrencyRepository private constructor (application: Application) {
     // Private members
     private val cryptoCompareAPI = API_Client_Instance.CryptoCompare_API_INSTANCE
 
-    private val _cryptocurrenciesList = MutableLiveData<List<FinancialItem>>()
+    suspend fun updatePrices(): List<FinancialItem> {
 
-    // Public members/functions
-    val cryptocurrenciesList: LiveData<List<FinancialItem>>
-        by lazy { _cryptocurrenciesList}
+        return cryptoCompareAPI.getTopListByVolume().await().toList()
 
-
-    fun updatePrices() {
-       cryptoCompareAPI.getTopListByVolume().enqueue(object: retrofit2.Callback<CryptoTopListResponse>{
-           override fun onResponse(call: Call<CryptoTopListResponse>, response: Response<CryptoTopListResponse>) {
-
-               _cryptocurrenciesList.postValue(response.body()?.toList())
-
-           }
-
-           override fun onFailure(call: Call<CryptoTopListResponse>, t: Throwable) {
-               // handle error
-           }
-       })
     }
 
 
@@ -46,7 +35,7 @@ class CryptocurrencyRepository private constructor (application: Application) {
         private var INTSANCE: CryptocurrencyRepository? = null
 
 
-        // Standard singleton instantiation
+        // Standard thread safe singleton instantiation
         fun getInstance(application: Application): CryptocurrencyRepository {
             return INTSANCE ?: synchronized(this) {
                 INTSANCE ?: CryptocurrencyRepository(application).also { INTSANCE = it }
