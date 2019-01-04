@@ -4,6 +4,7 @@
 package com.randallgr.stocks.data.repositories
 
 import android.app.Application
+import com.randallgr.stocks.data.database.AppDatabase
 import com.randallgr.stocks.data.models.CryptoItem
 import com.randallgr.stocks.data.network.API_Client_Instance
 
@@ -11,12 +12,10 @@ class CryptocurrencyRepository private constructor (application: Application) {
 
     // Private members
     private val cryptoCompareAPI = API_Client_Instance.CryptoCompare_API_INSTANCE
+    private val cryptoDao = AppDatabase.getInstance(application).cryptoDao()
 
-    suspend fun updatePrices(): List<CryptoItem> {
+    suspend fun updatePrices(): List<CryptoItem> = cryptoCompareAPI.getTopListByVolume().await().toList()
 
-        return cryptoCompareAPI.getTopListByVolume().await().toList()
-
-    }
 
 
     // Static methods

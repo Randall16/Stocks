@@ -29,5 +29,5 @@ data class CryptoItem(@PrimaryKey
     var isTopListResponse: Boolean = false
 
     @ColumnInfo
-    var isFravorite: Boolean = false
+    var isFavorite: Boolean = false
 }

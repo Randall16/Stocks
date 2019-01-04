@@ -15,6 +15,8 @@ interface CryptoDao {
     @Insert
     fun insert(cryptoItem: CryptoItem)
 
+    @Query("Delete from crypto_table Where isFavorite = 0")
+    fun deleteNonFavorites()
 
 
 }

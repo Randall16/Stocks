@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.randallgr.stocks.data.models.CryptoItem
-import com.randallgr.stocks.data.models.FinancialListItem
 import com.randallgr.stocks.data.repositories.CryptocurrencyRepository
 import kotlinx.coroutines.*
 import kotlinx.coroutines.android.Main
@@ -14,7 +13,7 @@ import kotlinx.coroutines.android.Main
 class TopCryptocurrenciesViewModel(application: Application) : AndroidViewModel(application) {
 
     // Private
-    private val cryptocurrencyRepository: CryptocurrencyRepository
+    private val cryptocurrencyRepository: CryptocurrencyRepository = CryptocurrencyRepository.getInstance(application)
     private val _topCryptocurrencies = MutableLiveData<List<CryptoItem>>()
 
     private val viewModelJob = Job()
@@ -25,10 +24,10 @@ class TopCryptocurrenciesViewModel(application: Application) : AndroidViewModel(
     val topCryptocurrencies: LiveData<List<CryptoItem>> by lazy { _topCryptocurrencies }
 
     init {
-        cryptocurrencyRepository = CryptocurrencyRepository.getInstance(application)
         updateTopPrices()
     }
 
+    // functions
     fun updateTopPrices() {
 
         // using coroutine
