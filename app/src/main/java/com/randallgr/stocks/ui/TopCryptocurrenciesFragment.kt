@@ -18,7 +18,7 @@ import com.randallgr.stocks.viewmodels.TopCryptocurrenciesViewModel
 class TopCryptocurrenciesFragment : Fragment() {
 
     private lateinit var topCryptocurrenciesViewModel: TopCryptocurrenciesViewModel
-    private lateinit var adapter: FinancialItemListAdapter
+    private lateinit var adapter: FinancialListItemAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +28,7 @@ class TopCryptocurrenciesFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_top_cryptocurrencies, container, false)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.cryptocurrenciesRecyclerView)
-        adapter = FinancialItemListAdapter(requireContext())
+        adapter = FinancialListItemAdapter(requireContext())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 

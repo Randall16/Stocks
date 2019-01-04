@@ -7,15 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.randallgr.stocks.R
-import com.randallgr.stocks.data.models.FinancialItem
-import kotlinx.android.synthetic.main.financial_item_layout.view.*
+import com.randallgr.stocks.data.models.FinancialListItem
 import kotlin.math.roundToInt
 
-class FinancialItemListAdapter internal constructor(context: Context)
-    : RecyclerView.Adapter<FinancialItemListAdapter.FinancialItemHolder>() {
+class FinancialListItemAdapter internal constructor(context: Context)
+    : RecyclerView.Adapter<FinancialListItemAdapter.FinancialItemHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var items = emptyList<FinancialItem>()
+    private var items = emptyList<FinancialListItem>()
 
     inner class FinancialItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val symbolTextView: TextView = itemView.findViewById(R.id.symbolTextView)
@@ -25,8 +24,8 @@ class FinancialItemListAdapter internal constructor(context: Context)
         val priceChangeTextView: TextView = itemView.findViewById(R.id.amountChangedTextView)
     }
 
-    internal fun setFinancialItems(financialItems: List<FinancialItem>) {
-        this.items = financialItems
+    internal fun setFinancialItems(financialListItems: List<FinancialListItem>) {
+        this.items = financialListItems
         notifyDataSetChanged()
     }
 

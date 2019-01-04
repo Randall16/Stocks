@@ -4,24 +4,15 @@
 package com.randallgr.stocks.data.repositories
 
 import android.app.Application
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import com.randallgr.stocks.data.models.CryptoTopListResponse
-import com.randallgr.stocks.data.models.FinancialItem
+import com.randallgr.stocks.data.models.CryptoItem
 import com.randallgr.stocks.data.network.API_Client_Instance
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.coroutineScope
-import retrofit2.Call
-import retrofit2.Response
 
 class CryptocurrencyRepository private constructor (application: Application) {
 
     // Private members
     private val cryptoCompareAPI = API_Client_Instance.CryptoCompare_API_INSTANCE
 
-    suspend fun updatePrices(): List<FinancialItem> {
+    suspend fun updatePrices(): List<CryptoItem> {
 
         return cryptoCompareAPI.getTopListByVolume().await().toList()
 
