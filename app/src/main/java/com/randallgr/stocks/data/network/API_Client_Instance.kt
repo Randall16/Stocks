@@ -19,6 +19,7 @@ object API_Client_Instance {
     val IEX_API_INSTANCE = Retrofit.Builder()
         .baseUrl(IEX_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
         .create(IEXInterface::class.java)
 

@@ -14,7 +14,7 @@ class CryptocurrencyRepository private constructor (application: Application) {
     private val cryptoCompareAPI = API_Client_Instance.CryptoCompare_API_INSTANCE
     private val cryptoDao = AppDatabase.getInstance(application).cryptoDao()
 
-    suspend fun updatePrices(): List<CryptoItem> = cryptoCompareAPI.getTopListByVolume().await().toList()
+    suspend fun updatePrices(): List<CryptoItem> = cryptoCompareAPI.fetchTopListByMarketCap().await().toList()
 
 
 

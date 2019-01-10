@@ -14,5 +14,6 @@ interface FinancialListItem {
     val change24Hour: Double
     val change24HourPercent: Double
     val imageURL: String?
+    val financialType: FinancialType
 
 }

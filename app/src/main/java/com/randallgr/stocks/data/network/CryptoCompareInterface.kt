@@ -7,5 +7,5 @@ import retrofit2.http.GET
 interface CryptoCompareInterface {
 
     @GET("top/mktcapfull?limit=20&tsym=USD")
-    fun getTopListByVolume(): Deferred<CryptoTopListResponse>
+    fun fetchTopListByMarketCap(): Deferred<CryptoTopListResponse>
 }

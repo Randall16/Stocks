@@ -26,6 +26,9 @@ data class CryptoItem(@PrimaryKey
     : FinancialListItem {
 
     @ColumnInfo
+    override val financialType: FinancialType = FinancialType.Cryptocurrency
+
+    @ColumnInfo
     var isTopListResponse: Boolean = false
 
     @ColumnInfo
