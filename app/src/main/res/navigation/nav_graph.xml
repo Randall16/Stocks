@@ -9,9 +9,9 @@
                 app:destination="@id/destination_cryptocurrency"/>
     </fragment>
     <fragment android:id="@+id/destination_cryptocurrency"
-              android:name="com.randallgr.stocks.ui.CryptocurrencyContainerFragment"
+              android:name="com.randallgr.stocks.ui.CryptoContainerFragment"
               android:label="Cryptocurrencies"
-              tools:layout="@layout/fragment_cryptocurrency_container">
+              tools:layout="@layout/fragment_crypto_container">
         <action android:id="@+id/action_cryptocurrencyContainerFragment_to_stocksContainerFragment2"
                 app:destination="@id/destination_stocks"/>
     </fragment>

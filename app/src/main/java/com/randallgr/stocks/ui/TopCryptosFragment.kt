@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.randallgr.stocks.R
-import com.randallgr.stocks.viewmodels.TopCryptocurrenciesViewModel
+import com.randallgr.stocks.viewmodels.TopCryptosViewModel
 
 
-class TopCryptocurrenciesFragment : Fragment() {
+class TopCryptosFragment : Fragment() {
 
-    private lateinit var topCryptocurrenciesViewModel: TopCryptocurrenciesViewModel
+    private lateinit var topCryptosViewModel: TopCryptosViewModel
     private lateinit var adapter: FinancialListItemAdapter
 
     override fun onCreateView(
@@ -25,7 +25,7 @@ class TopCryptocurrenciesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_top_cryptocurrencies, container, false)
+        val view = inflater.inflate(R.layout.fragment_top_cryptos, container, false)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.cryptocurrenciesRecyclerView)
         adapter = FinancialListItemAdapter(requireContext())
@@ -37,7 +37,7 @@ class TopCryptocurrenciesFragment : Fragment() {
         val ref = view.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
 
         ref.setOnRefreshListener{
-            topCryptocurrenciesViewModel.updateTopPrices()
+            topCryptosViewModel.updateTopPrices()
             ref.isRefreshing = false
         }
 
@@ -47,11 +47,11 @@ class TopCryptocurrenciesFragment : Fragment() {
     private fun subscribe() {
 
         // find viewModel
-        topCryptocurrenciesViewModel = ViewModelProviders.of(requireActivity())
-            .get(TopCryptocurrenciesViewModel::class.java)
+        topCryptosViewModel = ViewModelProviders.of(requireActivity())
+            .get(TopCryptosViewModel::class.java)
 
         // observe live data in viewModel
-        topCryptocurrenciesViewModel.topCryptocurrencies.observe(this, Observer { financialItems ->
+        topCryptosViewModel.topCryptocurrencies.observe(this, Observer { financialItems ->
             financialItems?.let { adapter.setFinancialItems(it) }
         })
 

@@ -2,6 +2,7 @@ package com.randallgr.stocks.data.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "crypto_table")
@@ -25,7 +26,7 @@ data class CryptoItem(@PrimaryKey
                       override val imageURL: String?)
     : FinancialListItem {
 
-    @ColumnInfo
+    @Ignore // NEED TO ADD TYPE CONVERTER TO HANDLE SAVING ENUM
     override val financialType: FinancialType = FinancialType.Cryptocurrency
 
     @ColumnInfo

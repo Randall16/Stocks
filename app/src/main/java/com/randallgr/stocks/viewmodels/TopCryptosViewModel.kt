@@ -10,7 +10,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.android.Main
 
 
-class TopCryptocurrenciesViewModel(application: Application) : AndroidViewModel(application) {
+class TopCryptosViewModel(application: Application) : AndroidViewModel(application) {
 
     // Private
     private val cryptocurrencyRepository: CryptocurrencyRepository = CryptocurrencyRepository.getInstance(application)
