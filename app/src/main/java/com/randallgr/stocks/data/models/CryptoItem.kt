@@ -26,12 +26,8 @@ data class CryptoItem(@PrimaryKey
                       override val imageURL: String?)
     : FinancialListItem {
 
-    @Ignore // NEED TO ADD TYPE CONVERTER TO HANDLE SAVING ENUM
+    @Ignore
     override val financialType: FinancialType = FinancialType.Cryptocurrency
 
-    @ColumnInfo
-    var isTopListResponse: Boolean = false
 
-    @ColumnInfo
-    var isFavorite: Boolean = false
 }

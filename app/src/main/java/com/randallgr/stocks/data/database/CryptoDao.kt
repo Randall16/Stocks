@@ -9,14 +9,14 @@ import com.randallgr.stocks.data.models.CryptoItem
 @Dao
 interface CryptoDao {
 
-    @Query("Select * from crypto_table")
+    @Query("SELECT * FROM crypto_table")
     fun getAllCryptocurrencies(): LiveData<List<CryptoItem>>
 
     @Insert
     fun insert(cryptoItem: CryptoItem)
 
-    @Query("Delete from crypto_table Where isFavorite = 0")
+    @Query("DELETE FROM crypto_table WHERE symbol NOT IN " +
+            " (SELECT symbol FROM favorites_table WHERE financialType = 'Cryptocurrency') ")
     fun deleteNonFavorites()
-
 
 }

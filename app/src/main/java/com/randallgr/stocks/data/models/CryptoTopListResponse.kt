@@ -27,7 +27,6 @@ data class CryptoTopListResponse(
             val change24HourPercent = i.RAW.USD.CHANGEPCT24HOUR
 
             val item = CryptoItem(symbol, name, price, change24Hour, change24HourPercent, imageUrl)
-                .also { it.isTopListResponse = true}
 
             answer.add(item)
         }
