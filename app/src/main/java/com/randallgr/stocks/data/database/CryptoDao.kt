@@ -1,8 +1,10 @@
 package com.randallgr.stocks.data.database
 
+import android.os.Build.VERSION_CODES.O
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.randallgr.stocks.data.models.CryptoItem
 
@@ -12,7 +14,7 @@ interface CryptoDao {
     @Query("SELECT * FROM crypto_table")
     fun getAllCryptocurrencies(): LiveData<List<CryptoItem>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(cryptoItem: CryptoItem)
 
     @Query("DELETE FROM crypto_table WHERE symbol NOT IN " +

@@ -7,6 +7,8 @@ import android.app.Application
 import com.randallgr.stocks.data.database.AppDatabase
 import com.randallgr.stocks.data.models.CryptoItem
 import com.randallgr.stocks.data.network.API_Client_Instance
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 
 class CryptocurrencyRepository private constructor (application: Application) {
 
@@ -14,7 +16,16 @@ class CryptocurrencyRepository private constructor (application: Application) {
     private val cryptoCompareAPI = API_Client_Instance.CryptoCompare_API_INSTANCE
     private val cryptoDao = AppDatabase.getInstance(application).cryptoDao()
 
-    suspend fun updatePrices(): List<CryptoItem> = cryptoCompareAPI.fetchTopListByMarketCap().await().toList()
+    suspend fun updatePrices() {
+        val responseList = cryptoCompareAPI.fetchTopListByMarketCap().await().toList()
+
+
+        // Add each element in responseList to the database
+        for(i in responseList)
+            cryptoDao.insert(i)
+    }
+
+    fun getTopListCryptos() = cryptoDao.getAllCryptocurrencies()
 
 
 

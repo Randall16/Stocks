@@ -14,14 +14,13 @@ class TopCryptosViewModel(application: Application) : AndroidViewModel(applicati
 
     // Private
     private val cryptocurrencyRepository: CryptocurrencyRepository = CryptocurrencyRepository.getInstance(application)
-    private val _topCryptocurrencies = MutableLiveData<List<CryptoItem>>()
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
 
     // Public
-    val topCryptocurrencies: LiveData<List<CryptoItem>> by lazy { _topCryptocurrencies }
+    val topCryptocurrencies: LiveData<List<CryptoItem>> = cryptocurrencyRepository.getTopListCryptos()
 
     init {
         updateTopPrices()
@@ -32,8 +31,8 @@ class TopCryptosViewModel(application: Application) : AndroidViewModel(applicati
 
         // using coroutine
         uiScope.launch {
-            val temp = async {cryptocurrencyRepository.updatePrices()}
-            _topCryptocurrencies.postValue( temp.await() )
+            val operation = async { cryptocurrencyRepository.updatePrices() }.await()
+            // dismiss loading here
         }
 
     }
