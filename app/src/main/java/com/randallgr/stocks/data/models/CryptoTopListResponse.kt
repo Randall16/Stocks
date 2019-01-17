@@ -6,6 +6,8 @@
 
 package com.randallgr.stocks.data.models
 
+import java.util.*
+
 data class CryptoTopListResponse(
     val Data: List<Data>,
     val HasWarning: Boolean,
@@ -18,15 +20,21 @@ data class CryptoTopListResponse(
     fun toList(): List<CryptoItem> {
         val answer = mutableListOf<CryptoItem>()
 
+        val time = Calendar.getInstance().time
         for(i in Data) {
+
+            // Extract the info we care about
             val name = i.CoinInfo.FullName
             val symbol = i.CoinInfo.Name
             val imageUrl = i.CoinInfo.ImageUrl
             val price = i.RAW.USD.PRICE
             val change24Hour = i.RAW.USD.CHANGE24HOUR
             val change24HourPercent = i.RAW.USD.CHANGEPCT24HOUR
+            val marketCap = i.RAW.USD.MKTCAP
 
-            val item = CryptoItem(symbol, name, price, change24Hour, change24HourPercent, imageUrl)
+            // Create CryptoItem
+            val item = CryptoItem(symbol, name, price, change24Hour, change24HourPercent,
+                marketCap, imageUrl, time)
 
             answer.add(item)
         }

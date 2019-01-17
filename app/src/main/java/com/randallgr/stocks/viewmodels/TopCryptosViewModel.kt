@@ -3,24 +3,22 @@ package com.randallgr.stocks.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.randallgr.stocks.data.models.CryptoItem
-import com.randallgr.stocks.data.repositories.CryptocurrencyRepository
+import com.randallgr.stocks.data.repositories.CryptoRepository
 import kotlinx.coroutines.*
-import kotlinx.coroutines.android.Main
 
 
 class TopCryptosViewModel(application: Application) : AndroidViewModel(application) {
 
     // Private
-    private val cryptocurrencyRepository: CryptocurrencyRepository = CryptocurrencyRepository.getInstance(application)
+    private val cryptoRepository: CryptoRepository = CryptoRepository.getInstance(application)
 
     private val viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val backgroundScope = CoroutineScope(Dispatchers.IO + viewModelJob)
 
 
     // Public
-    val topCryptocurrencies: LiveData<List<CryptoItem>> = cryptocurrencyRepository.getTopListCryptos()
+    val topCryptocurrencies: LiveData<List<CryptoItem>> = cryptoRepository.getTopListCryptos()
 
     init {
         updateTopPrices()
@@ -30,8 +28,8 @@ class TopCryptosViewModel(application: Application) : AndroidViewModel(applicati
     fun updateTopPrices() {
 
         // using coroutine
-        uiScope.launch {
-            val operation = async { cryptocurrencyRepository.updatePrices() }.await()
+        backgroundScope.launch {
+            val operation = async { cryptoRepository.updatePrices() }.await()
             // dismiss loading here
         }
 

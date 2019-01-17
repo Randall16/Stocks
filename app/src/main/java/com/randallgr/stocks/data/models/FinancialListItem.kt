@@ -6,6 +6,9 @@
 
 package com.randallgr.stocks.data.models
 
+import org.jetbrains.annotations.NotNull
+import java.util.Date
+
 interface FinancialListItem {
 
     val symbol: String
@@ -15,5 +18,6 @@ interface FinancialListItem {
     val change24HourPercent: Double
     val imageURL: String?
     val financialType: FinancialType
-
+    val marketCap: Double?
+    val timeLastRefreshed: Date
 }
